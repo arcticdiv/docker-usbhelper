@@ -34,4 +34,4 @@ VOLUME ["$USBHELPER_ROOT/userdata", "$USBHELPER_ROOT/downloads"]
 # root is required for fixing volume permissions, entrypoint script drops privileges
 USER root
 COPY entrypoint.sh /usbhelper-entrypoint.sh
-CMD /usbhelper-entrypoint.sh
+ENTRYPOINT /usbhelper-entrypoint.sh
