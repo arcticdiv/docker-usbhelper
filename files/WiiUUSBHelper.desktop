@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Wii U USB Helper
+Exec=env WINEPREFIX="/home/user/.wine32" wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/user/usbhelper/USBHelperLauncher.exe --wine --portable
+Type=Application
+StartupNotify=true
+Path=/home/user/usbhelper/
+Icon=/home/user/usbhelper/USBHelperLauncher.png
+StartupWMClass=usbhelperlauncher.exe
