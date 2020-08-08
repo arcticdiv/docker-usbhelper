@@ -9,10 +9,13 @@ DIRS=(
 mkdir -p "${DIRS[@]}"
 chown user:user "${DIRS[@]}"
 
-# copy initial config
-if [ ! -f "$USBHELPER_ROOT/userdata/user.config" ]; then
-    cp "$USBHELPER_ROOT/usbhelper.config" "$USBHELPER_ROOT/userdata/user.config"
-    chown user:user "$USBHELPER_ROOT/userdata/user.config"
-fi
+su user -c bash <<EOF
+    set -xe
+    # initialize launcher config
+    [ -f "$USBHELPER_ROOT/userdata/conf.json" ] || echo "{}" > "$USBHELPER_ROOT/userdata/conf.json"
 
-su user -c "/entrypoint.sh"
+    # copy initial config
+    [ -f "$USBHELPER_ROOT/userdata/user.config" ] || cp "$USBHELPER_ROOT/usbhelper.config" "$USBHELPER_ROOT/userdata/user.config"
+
+    /entrypoint.sh
+EOF

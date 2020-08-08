@@ -25,8 +25,9 @@ RUN /scripts/install_usbhelper.sh
 COPY --chown=user:user files/WiiUUSBHelper.desktop /home/user/Desktop/
 COPY --chown=user:user files/USBHelperLauncher.png "$USBHELPER_ROOT/"
 
-# copy initial config
+# copy initial config, create link for launcher config
 COPY --chown=user:user files/user.config "$USBHELPER_ROOT/usbhelper.config"
+RUN ln -s "./userdata/conf.json" "$USBHELPER_ROOT/conf.json"
 
 VOLUME ["$USBHELPER_ROOT/userdata", "$USBHELPER_ROOT/downloads"]
 
