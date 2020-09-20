@@ -2,3 +2,4 @@
 !files/
 !scripts/
 !entrypoint.sh
+!*.zip

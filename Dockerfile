@@ -1,4 +1,13 @@
-FROM shiftinv/wine-dotnet:staging-48-vnc
+ARG BASE_IMAGE=shiftinv/wine-dotnet:staging-48-vnc
+
+# temporary workaround as latest launcher release isn't compatible yet
+#   the .zip is the artifact from this run: https://github.com/shiftinv/USBHelperLauncher/actions/runs/208772821
+FROM $BASE_IMAGE
+COPY USBHelperLauncher.zip /tmp/USBHelperLauncher.zip
+RUN unzip /tmp/USBHelperLauncher.zip -d /tmp/USBHelperLauncher
+
+
+FROM $BASE_IMAGE
 
 # install dependencies
 USER root
@@ -15,7 +24,8 @@ ENV WINEDLLOVERRIDES="mshtml=d;$WINEDLLOVERRIDES"
 ARG USBHELPER_VERSION=0.6.1.653
 ARG LAUNCHER_VERSION=latest
 ENV USBHELPER_ROOT=/home/user/usbhelper
-RUN mkdir $USBHELPER_ROOT
+# RUN mkdir $USBHELPER_ROOT
+COPY --from=0 --chown=user:user /tmp/USBHelperLauncher $USBHELPER_ROOT
 WORKDIR $USBHELPER_ROOT
 
 COPY scripts/install_usbhelper.sh /scripts/install_usbhelper.sh
