@@ -2,7 +2,7 @@
 set -o pipefail
 
 _install_zip() {
-    wget "$1" -O .tmp_download.zip
+    curl -fsSL "$1" -o .tmp_download.zip
     unzip -o .tmp_download.zip
     rm .tmp_download.zip
 }
