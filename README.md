@@ -12,12 +12,12 @@ Docker image with [USBHelperLauncher](https://github.com/FailedShack/USBHelperLa
         -v "$(pwd)/data/userdata:/home/user/usbhelper/userdata" \
         -v "$(pwd)/data/downloads:/home/user/usbhelper/downloads" \
         -p "127.0.0.1:5901:5901" \
-        -e VNCPASSWD="<unset>" \
+        -p "127.0.0.1:8081:8081" \
         arcticdiv/usbhelper:latest
     ```
 
-In both cases, replace `<unset>` with a new 8-character VNC password before starting.\
-Once started, you can connect to `127.0.0.1:5901` with a VNC client.
+Optionally you may set a password for the VNC connection by setting the `VNCPASSWD` environment variable accordingly, but since the ports are only bound to `localhost` by default, it isn't required.\
+Once started, navigate to `localhost:8081` with a web browser, or connect to `localhost:5901` with a VNC client.
 
 ## Building
 If you want to build the docker image yourself, just run `make build`.\
