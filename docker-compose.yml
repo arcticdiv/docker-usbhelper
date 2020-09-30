@@ -3,12 +3,12 @@ version: '3'
 services:
     main:
         image: arcticdiv/usbhelper:latest
-        restart: 'no'
         environment:
-            # VNCPASSWD: '<unset>'
+            # VNCPASSWD: 'changeme'  # up to 8 characters
             VNCRESOLUTION: '1920x1080'
         ports:
-            - '127.0.0.1:5901:5901'
+            - '127.0.0.1:5901:5901'  # VNC
+            - '127.0.0.1:8081:8081'  # noVNC
         volumes:
             - './data/userdata:/home/user/usbhelper/userdata'
             - './data/downloads:/home/user/usbhelper/downloads'
